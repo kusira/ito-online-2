@@ -58,7 +58,7 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
   // ゲームスタート
   const settingStart = async()=> {
     // 同じ部屋にいる人のシーン遷移
-    const membersArray = Object.entries(members)
+    const membersArray = Object.entries(members);
     membersArray.forEach(async(member, _) => {
       const userDocumentRef = doc(db, "users", member[0]);
       await updateDoc(userDocumentRef, {
@@ -68,26 +68,38 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
     
     // カードの割り当て
     const enteringRoomDocumentRef = doc(db, "rooms", `room${userData?.enteringRoom}`);
-    const shuffleArray = (array: number[]) => {
+    const shuffleArray = (array) => {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
     };
+    
     const originalArray = Array.from({ length: 100 }, (_, index) => index + 1);
-    // 配列をシャッフル
+    
     shuffleArray(originalArray);
-    const cards = originalArray.slice(0, 10);
+    const cards = originalArray.slice(0, enteringRoomData?.playerCount );
+    
     let newMembers = { ...members };
-
+    function compareNumbers(a:number, b:number) {
+      return a - b;
+    }
+    
     // カードに番号をつける
-    const sortedCards = [...cards].sort((a, b) => a - b);
-    const numberedCards = sortedCards.map((_, index) => index + 1);
-
+    const sortedCards = [...cards]
+    sortedCards.sort(compareNumbers)
+    const numberedCards:number[] = [];
+    sortedCards.forEach((sortedCard, _)=>{
+        numberedCards.push(cards.indexOf(sortedCard)+1)
+    })
+    console.log(cards)
+    console.log(numberedCards)
+    
     membersArray.forEach(async(member, index) => {
       newMembers[member[0]][3] = cards[index]
       newMembers[member[0]][4] = numberedCards[index]
     });
+
     // ゲームステータスの変更
     await updateDoc(enteringRoomDocumentRef, {
       members: newMembers,

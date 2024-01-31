@@ -2,6 +2,7 @@ import { signInWithPopup, signOut } from "firebase/auth";
 import { db, auth, googleProvider } from "../firebase";
 import { User } from 'firebase/auth';
 import { doc, setDoc, updateDoc } from "firebase/firestore";
+import favicon from "../assets/favicon.png"
 
 const AuthComponent = ({ user } : { user: User|null|undefined }) => {
 
@@ -57,7 +58,7 @@ const AuthComponent = ({ user } : { user: User|null|undefined }) => {
     <div className="h-[80px] flex items-center">
       {user ? (
         <div className="w-[150px] flex justify-between">
-          <img src={ user.photoURL || ""} className="rounded-[50%]" width="40" height="40"/>
+          <img src={ user.photoURL || favicon } className="rounded-[50%]" width="40" height="40"/>
           <p onClick={ handleSignOut } className="text-white p-2 border-[1px] rounded-lg cursor-pointer">ログアウト</p>
         </div>
       ) : (
