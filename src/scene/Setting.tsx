@@ -141,17 +141,19 @@ function Setting({ userData, enteringRoomData, theme, setTheme }: { userData: Do
             <div className="h-max">
               <p className="text-xs mb-2">※このページはホストにだけ表示されています</p>
               <p className="text-xl mb-2">お題📜</p>
-              <input type="text"
-                placeholder="コンビニの商品の人気"
-                maxLength={ 20 }
-                value={ theme }
-                onChange={(e) => setTheme(e.target.value)}
-                className="w-[200px] mr-4 border-black border-b-[1px] focus:border-purple-700 focus:border-b-[2px] outline-none"
-              />
-              <span 
-                onClick={() => randomTheme()}
-                className="text-sm border-gray-700 border-[1px] p-1 bg-gray-200 hover:bg-gray-400 transition-all cursor-pointer select-none"
-              >ランダム生成</span>
+              <div className="flex flex-col sm:flex-row">
+                <input type="text"
+                  placeholder="コンビニの商品の人気"
+                  maxLength={ 20 }
+                  value={ theme }
+                  onChange={(e) => setTheme(e.target.value)}
+                  className="w-[200px] mr-4 mb-2 border-black border-b-[1px] focus:border-purple-700 focus:border-b-[2px] outline-none"
+                />
+                <p
+                  onClick={() => randomTheme()}
+                  className="text-sm w-max border-gray-700 border-[1px] p-1 bg-gray-200 hover:bg-gray-400 transition-all cursor-pointer select-none"
+                >ランダム生成</p>
+              </div>
             </div>
 
             <div className="pt-12">

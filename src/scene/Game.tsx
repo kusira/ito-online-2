@@ -113,14 +113,14 @@ function Game({ userData, enteringRoomData }: { userData: DocumentData, entering
           />
         </div>
 
-        <div className="mx-auto w-max">
+        <div className="mx-auto max-w-[70%] w-max">
           {membersArray.map((member, index) =>(
-            <div key={index} className="grid grid-cols-5 gap-4 border-black border-b-[1px] p-2">
-                <p className="col-span-2">{member[1][0]}{userData?.uid === member[0] && <span> (あなた)</span>}</p>
-                <p className="col-span-2 text-gray-500">{member[1][2]}</p>
-                {  isDisplayNumber &&
-                  <p className="col-span-1 font-bold ">{member[1][3]} ({member[1][4]})</p>
-                }
+            <div key={index} className="grid grid-cols-5 gap-4 grid-flow-row border-black border-b-[1px] p-2">
+              <p className="col-span-2 text-sm sm:text-base">{member[1][0]}{userData?.uid === member[0] && <span> (あなた)</span>}</p>
+              <p className="col-span-2 text-gray-500 text-sm sm:text-base">{member[1][2]}</p>
+              {  isDisplayNumber &&
+                <p className="col-span-1 font-bold text-sm sm:text-base ">{member[1][3]} ({member[1][4]})</p>
+              }
             </div>
           ))}
         </div>

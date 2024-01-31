@@ -59,7 +59,7 @@ function Start({userData, roomsData, handleName, setHandleName} : {userData: Doc
 
 
   return (
-    <div className="w-[70%] mx-auto pt-[70px]">
+    <div className="w-[90%] md:w-[70%] mx-auto pt-[70px]">
       {/* ルームボックス */}
       <div className="relative h-[260px] border-black border-[2px] mb-[40px] flex flex-wrap justify-around overflow-x-hidden cursor-pointer">
         {handleName.trim() === "" && 
