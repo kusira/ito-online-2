@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 // コンポーネント
 import Header from "./components/Header"
 import Footer from "./components/Footer"
+import How from "./components/How";
 
 // シーン
 import Logout from "./scene/Logout";
@@ -19,6 +20,7 @@ import Setting from "./scene/Setting";
 import Game from "./scene/Game";
 
 function App() {
+
   const [user, loading] = useAuthState(auth);
   const [scene, setScene] = useState<string>("");
 
@@ -66,17 +68,19 @@ function App() {
     <>
       <Header user={user} />
       <div className={`relative max-w-[500px] w-[90vw] ${scene!=="game" ? "h-[500px]" : "h-max"} mx-auto my-[100px] outline outline-2`}>
-      { loading &&
-        <div className="abslute w-[100%] h-[100%] flex justify-center items-center">
-          <CircularProgress />
-        </div>
-      }
-      {scene == "logout" && <Logout />}
-      {scene == "start" && userData && roomsData && <Start userData={userData} roomsData={roomsData} handleName={handleName} setHandleName={setHandleName}/>}
-      {scene == "ready" && userData && enteringRoomData && <Ready userData={userData} enteringRoomData={enteringRoomData} isStartable={isStatable}/>}
-      {scene == "setting" && userData && enteringRoomData && <Setting userData={userData} enteringRoomData={enteringRoomData} theme={theme} setTheme={setTheme}/>}
-      {scene == "game" && userData && enteringRoomData && <Game userData={userData} enteringRoomData={enteringRoomData} />}
-    </div>
+        { loading &&
+          <div className="abslute w-[100%] h-[100%] flex justify-center items-center">
+            <CircularProgress />
+          </div>
+        }
+        {scene === "logout" && <Logout />}
+        {scene === "start" && userData && roomsData && <Start userData={userData} roomsData={roomsData} handleName={handleName} setHandleName={setHandleName}/>}
+        {scene === "ready" && userData && enteringRoomData && <Ready userData={userData} enteringRoomData={enteringRoomData} isStartable={isStatable}/>}
+        {scene === "setting" && userData && enteringRoomData && <Setting userData={userData} enteringRoomData={enteringRoomData} theme={theme} setTheme={setTheme}/>}
+        {scene === "game" && userData && enteringRoomData && <Game userData={userData} enteringRoomData={enteringRoomData} />}
+        {scene !== "logout" && <How />}
+        
+      </div>
       <Footer />
     </>
   )
