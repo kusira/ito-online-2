@@ -113,7 +113,7 @@ function Game({ userData, enteringRoomData }: { userData: DocumentData, entering
           />
         </div>
 
-        <div className="mx-auto max-w-[70%] w-max">
+        <div className="mx-auto max-w-[90%] w-max">
           {membersArray.map((member, index) =>(
             <div key={index} className="grid grid-cols-5 gap-4 grid-flow-row border-black border-b-[1px] p-2">
               <p className="col-span-2 text-sm sm:text-base">{member[1][0]}{userData?.uid === member[0] && <span> (あなた)</span>}</p>

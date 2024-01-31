@@ -151,7 +151,7 @@ function Setting({ userData, enteringRoomData, theme, setTheme }: { userData: Do
                 />
                 <p
                   onClick={() => randomTheme()}
-                  className="text-sm w-max border-gray-700 border-[1px] p-1 bg-gray-200 hover:bg-gray-400 transition-all cursor-pointer select-none"
+                  className="text-sm w-max h-max p-1 mb-2 border-gray-700 border-[1px] bg-gray-200 hover:bg-gray-400 transition-all cursor-pointer select-none"
                 >ランダム生成</p>
               </div>
             </div>
