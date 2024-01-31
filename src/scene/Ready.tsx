@@ -68,7 +68,7 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
     
     // カードの割り当て
     const enteringRoomDocumentRef = doc(db, "rooms", `room${userData?.enteringRoom}`);
-    const shuffleArray = (array) => {
+    const shuffleArray = (array: number[]) => {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -76,8 +76,8 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
     };
     
     const originalArray = Array.from({ length: 100 }, (_, index) => index + 1);
-    
     shuffleArray(originalArray);
+
     const cards = originalArray.slice(0, enteringRoomData?.playerCount );
     
     let newMembers = { ...members };
@@ -92,9 +92,7 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
     sortedCards.forEach((sortedCard, _)=>{
         numberedCards.push(cards.indexOf(sortedCard)+1)
     })
-    console.log(cards)
-    console.log(numberedCards)
-    
+
     membersArray.forEach(async(member, index) => {
       newMembers[member[0]][3] = cards[index]
       newMembers[member[0]][4] = numberedCards[index]
