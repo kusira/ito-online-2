@@ -39,7 +39,7 @@ function Start({userData, roomsData, handleName, setHandleName} : {userData: Doc
         // ルームにユーザーを追加
         await updateDoc(enteringRoomDocumentRef, {
           [`members.${userData?.uid}`]: [handleName, false, "キーワード", -1, -1],
-          playerCount: enteringRoomData.playerCount + 1,
+          playerCount: Object.entries(enteringRoomData?.members).length + 1,
           status: status,
         });
       };

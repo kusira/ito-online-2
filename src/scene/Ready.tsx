@@ -23,7 +23,7 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
         delete members[userData?.uid]
         await updateDoc(enteringRoomDocumentRef, {
           members,
-          playerCount: enteringRoomData.playerCount - 1,
+          playerCount: Object.entries(members).length,
           status: status,
         });
       };
@@ -79,7 +79,7 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
     shuffleArray(originalArray);
 
     const cards = originalArray.slice(0, enteringRoomData?.playerCount );
-    
+
     let newMembers = { ...members };
     function compareNumbers(a:number, b:number) {
       return a - b;
@@ -109,10 +109,12 @@ function Ready({ userData, enteringRoomData, isStartable }: { userData: Document
     <div className="w-[70%] mx-auto py-[40px]">
       <div
         onClick={() => exitRoom()}
-        className="w-max text-xl text-red-600 underline hover:opacity-80 transition-all cursor-pointer"
+        className="w-max text-xl text-red-600 underline mb-[30px] hover:opacity-80 transition-all cursor-pointer"
       >↩退出する</div>
       <div>
-        <div className="h-[260px] my-[30px] border-black border-2 overflow-y-scroll">
+        {/* メンバーボックス */}
+        <p className="flex justify-end mb-2 mr-2">{enteringRoomData.playerCount} / 6</p>
+        <div className="h-[260px] mb-[30px] border-black border-2 overflow-y-scroll">
         {members && Object.entries(members).map((member: any, index: number) => (
           <div key={index} className="px-4 border-black border-b-[1px] flex justify-between">
             <p className="leading-[50px]"><span className="mr-4">{ index+1 }.</span>{ member[1][0] } <span>{ member[0]===enteringRoomData.host && " 👑"}</span></p>

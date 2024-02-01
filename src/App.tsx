@@ -61,6 +61,7 @@ function App() {
         setIsStatable(true);
       }
       setTheme(enteringRoomData?.theme);
+      
     }
   }, [enteringRoomData])
 
